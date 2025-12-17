@@ -5,6 +5,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
+.vs/
 *.csproj
 *.unityproj
 *.sln
@@ -18,3 +19,4 @@
 *.pdb
 *.opendb
 *.VC.db
+*.vsconfig

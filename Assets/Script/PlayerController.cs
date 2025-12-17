@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    
     [Header("Moved Info")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
@@ -9,22 +10,27 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Check Info")]
     [SerializeField] private float groundCheckDistance;
 
+
+   
     private Rigidbody2D rb;
+    private Animator animator;
     private bool gameStarted = false;
-    private bool isGrounded;
+    private bool isGrounded = true;
     
     public LayerMask groundLayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
+        animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         GameStart();
+        AnimatorController();
         if (gameStarted)
         {
             PlayerMove();
@@ -32,6 +38,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    private void AnimatorController()
+    {
+        animator.SetFloat("xVelocity", rb.linearVelocity.x);
+        animator.SetBool("IsGrounded", isGrounded);
+        
     }
 
     private void GameStart()
@@ -47,13 +60,13 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
         
         if (Input.GetButtonDown("Jump") && isGrounded)
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);        
                
     }
 
     private void PlayerMove()
     {
+        
         rb.linearVelocity = new Vector2(moveSpeed,rb.linearVelocity.y);
     }
     private void OnDrawGizmos()
