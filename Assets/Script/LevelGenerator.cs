@@ -17,8 +17,9 @@ public class LevelGenerator : MonoBehaviour
 
 
     [Header("Coin Settings")]
-    [SerializeField] private float coinSpacing;
-    [SerializeField] private int maxCoinsPerGround;
+    [SerializeField] private int maxCoinsPerGround = 3;
+    [SerializeField] private float coinYNormal = 1f;
+    [SerializeField] private float coinYJump = 3.5f;
 
     private Vector3 lastEndPosition;
     private List<GameObject> groundActive = new List<GameObject>();
@@ -70,11 +71,56 @@ public class LevelGenerator : MonoBehaviour
         newGround.transform.position = lastEndPosition;
         newGround.transform.rotation = Quaternion.identity;
 
+        // Spawn coins
+        SpawnCoins(newGround);
         // Add to active list
         groundActive.Add(newGround);
 
         // Update last end position
         lastEndPosition += new Vector3(groundWidth, 0, 0);
+    }
+
+    private void SpawnCoins(GameObject groundObj)
+    {
+        // Remove old coin
+        foreach (Transform child in groundObj.transform)
+        {
+            if (child.CompareTag("Coin"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        // set coin parent to ground
+        int coinsToSpawn = Random.Range(1, maxCoinsPerGround + 1);
+
+        // create coins
+        for (int i = 0; i < coinsToSpawn; i++)
+        {
+            // calculate position
+            float segmentWidth = groundWidth / (coinsToSpawn + 1);
+            float xPos = segmentWidth * (i + 1);
+
+            float yPos;
+            float randomValue = Random.Range(0f, 1f);
+
+            if (randomValue > 0.5f)
+            {
+                yPos = coinYJump;
+            }
+            else
+            {
+                yPos = coinYNormal;
+            }
+
+            //create coin
+            GameObject tempCoin = Instantiate(coinPrefab, groundObj.transform);
+
+            tempCoin.transform.localPosition = new Vector3(xPos, yPos, 0);
+
+            // set tag
+            tempCoin.tag = "Coin";
+        }
     }
 
     private void RemoveOldGround()

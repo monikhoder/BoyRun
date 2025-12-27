@@ -233,8 +233,9 @@ MonoBehaviour:
   groundWidth: 28.77
   groundInitial: 2
   minDistanceToSpawn: 40
-  coinSpacing: 15
-  maxCoinsPerGround: 2
+  maxCoinsPerGround: 3
+  coinYNormal: -2
+  coinYJump: 0
 --- !u!4 &316635313
 Transform:
   m_ObjectHideFlags: 0
@@ -654,6 +655,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &594929176
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_Name
+      value: Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 49e6ee33250214a9facc214f3a2fecb7, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +753,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000111585fcdbf14cfc3f266403
+  m_ApplyToSortingLayers: 00000000111585fcdbf14cfc3f2664036513b5e6
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -962,7 +1024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u2764\u2764\u2764\u2764\u2764\u2764"
+  m_Text: "\u2764\u2764\u2764\u2764\u2764"
 --- !u!222 &805765300
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1349,7 +1411,7 @@ GameObject:
   - component: {fileID: 1377328994}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1512,7 +1574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0129501d039d95a4088da51e00c05b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 2.03
+  moveSpeed: 4
   jumpForce: 15
   groundCheckDistance: 0.91
   groundLayer:
@@ -2090,3 +2152,4 @@ SceneRoots:
   - {fileID: 316635313}
   - {fileID: 7116339064007183439}
   - {fileID: 1030755875}
+  - {fileID: 594929176}

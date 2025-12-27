@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 115
+  controlID: 53
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -845,9 +845,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -3.4179735, y: -0.26764295, z: -0.09754205}
+    m_Target: {x: 6.0943847, y: -2.721016, z: -0.1764555}
     speed: 2
-    m_Value: {x: -3.4179735, y: -0.26764295, z: -0.09754205}
+    m_Value: {x: 6.0943847, y: -2.721016, z: -0.1764555}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -897,9 +897,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10.468363
+    m_Target: 18.359667
     speed: 2
-    m_Value: 10.468363
+    m_Value: 18.359667
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -973,6 +973,7 @@ MonoBehaviour:
     m_KeySerializationHelper:
     - {fileID: -4300833897152652206, guid: fecee1747f5b7084fb28f7da4a4aa398, type: 2}
     - {fileID: -4797067118944841853, guid: fecee1747f5b7084fb28f7da4a4aa398, type: 2}
+    - {fileID: 110700000, guid: b04b8963686e349daaf669d261d20a83, type: 2}
     m_ValueSerializationHelper:
     - e00: 1.0533274
       e01: 0
@@ -1006,10 +1007,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: fecee1747f5b7084fb28f7da4a4aa398, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: b04b8963686e349daaf669d261d20a83, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -4300833897152652206, guid: fecee1747f5b7084fb28f7da4a4aa398, type: 2}
+  - m_Target: {fileID: 110700000, guid: b04b8963686e349daaf669d261d20a83, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1063,21 +1080,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: fcfaffff66b60000dcb60000
+      m_ExpandedIDs: fcfaffffb0b60000f2b60000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Coin
-        m_OriginalName: Coin
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -3806
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 9}
@@ -1152,7 +1169,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b0230000
     m_LastClickedID: 9136
-    m_ExpandedIDs: 000000009cb700009eb70000a0b70000a2b70000a4b70000a6b70000a8b70000aab70000acb70000aeb70000b0b70000b2b70000b4b70000b6b70000b8b70000bab70000bcb70000beb70000c0b70000c2b70000c4b70000c6b70000
+    m_ExpandedIDs: 00000000b4b70000b6b70000b8b70000bab70000bcb70000beb70000c0b70000c2b70000c4b70000c6b70000c8b70000cab70000ccb70000ceb70000d0b70000d2b70000d4b70000d6b70000d8b70000dab70000dcb70000deb70000e0b70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1181,7 +1198,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000009cb700009eb70000a0b70000a2b70000a4b70000a6b70000a8b70000aab70000aeb70000b0b70000b2b70000b4b70000b6b70000bab70000bcb70000c0b70000c2b70000c6b700003cb90000d6bb0000dabb0000e6bb0000e8bb0000
+    m_ExpandedIDs: ffffffff00000000b4b70000b6b70000b8b70000bab70000bcb70000beb70000c0b70000c2b70000c4b70000c6b70000c8b70000ccb70000ceb70000d0b70000d2b70000d4b70000d6b70000d8b70000dab70000dcb70000deb70000e0b7000050b90000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1332,7 +1349,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 1}
-  m_TargetSize: {x: 2532, y: 1170}
+  m_TargetSize: {x: 2048, y: 1536}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1350,11 +1367,11 @@ MonoBehaviour:
     pluginStates:
     - '{}'
     - '{}'
-    scale: 33
+    scale: 25
     fitToScreenEnabled: 1
     rotationDegree: 270
     highlightSafeAreaEnabled: 0
-    friendlyName: Apple iPhone 12
+    friendlyName: Apple iPad Mini 4
     screenIndex: 0
     networkReachability: 1
     systemLanguage: 10

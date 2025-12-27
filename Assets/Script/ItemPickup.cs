@@ -2,24 +2,16 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Item picked up by the player.");
-            FindAnyObjectByType<UIManager>().RefreshGoldHitCount();
+
+
+           // FindAnyObjectByType<UIManager>()?.RefreshGoldHitCount();
+
+            // Destroy coin
             Destroy(gameObject);
         }
     }
