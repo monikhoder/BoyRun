@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,7 +16,6 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    private bool gameStarted = false;
     private bool isGrounded = true;
 
     public LayerMask groundLayer;
@@ -29,15 +30,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameStart();
+
         AnimatorController();
-        if (gameStarted)
+        PauseGame();
+        PlayerMove();
+        PlayerJump();
+    }
+
+    private void PauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PlayerMove();
-            PlayerJump();
+            if (Time.timeScale == 0)
+            {
+                FindAnyObjectByType<UIManager>()?.ResumeGame();
+            }
+            else
+            {
+                FindAnyObjectByType<UIManager>()?.PauseGame();
+            }
         }
-
-
     }
 
     private void AnimatorController()
@@ -47,20 +59,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void GameStart()
-    {
-        gameStarted = true;
-        // if (Input.GetButtonDown("Submit"))
-        //     gameStarted = true;
-        // if (Input.GetButtonDown("Cancel"))
-        //     gameStarted = false;
-    }
-
     private void PlayerJump()
     {
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
 
-        if (Input.GetButtonDown("Jump") || Input.GetMouseButtonDown(0) && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && !EventSystem.current.IsPointerOverGameObject() || Input.GetMouseButtonDown(0) && isGrounded && !EventSystem.current.IsPointerOverGameObject())
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
     }

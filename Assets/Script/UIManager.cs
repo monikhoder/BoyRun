@@ -1,42 +1,88 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private static int GoldCount = 0;
+    [Header("UI References")]
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Text highScoreText;
+    [SerializeField] private GameObject startScreen;
+    [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject gameUI;
 
-    [SerializeField] private Text goldCountLabel = null;
-    [SerializeField] private Text labelWinLose;
-    [SerializeField] private GameObject winloseScreen;
+    private int currentScore = 0;
+    private int highScore = 0;
 
-    private void OnEnable()
+    void Start()
     {
-        GoldCount = 0;
-        goldCountLabel.text = "GOLD : " + GoldCount;
+        //Load High Score
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        UpdateScoreUI();
+
+        //show start screen at the beginning
+        ShowStartScreen();
     }
-    public void ShowWinLoseScreen(String message)
+
+    // game control
+
+    public void ShowStartScreen()
     {
-        labelWinLose.text = message;
-        winloseScreen.SetActive(true);
+        Time.timeScale = 0;
+        startScreen.SetActive(true);
+        pauseScreen.SetActive(false);
+        gameUI.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1;
+        startScreen.SetActive(false);
+        gameUI.SetActive(true);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        pauseScreen.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        pauseScreen.SetActive(false);
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("DemoAIAgent");
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void BackToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Menu");
     }
 
-    public void RefreshGoldHitCount()
+    public void RefreshCoin()
     {
-        GoldCount += 1;
-        goldCountLabel.text = "GOLD : " + GoldCount;
+        currentScore++;
+
+        // check for high score
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+            // save high score
+            PlayerPrefs.SetInt("HighScore", highScore);
+        }
+
+        UpdateScoreUI();
     }
 
-
+    private void UpdateScoreUI()
+    {
+        if (scoreText != null) scoreText.text = "SCORE: " + currentScore;
+        if (highScoreText != null) highScoreText.text = "HIGH SCORE: " + highScore;
+    }
 }

@@ -6,10 +6,10 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Item picked up by the player.");
+           // Debug.Log("Item picked up by the player.");
 
 
-           // FindAnyObjectByType<UIManager>()?.RefreshGoldHitCount();
+            FindAnyObjectByType<UIManager>()?.RefreshCoin();
 
             // Destroy coin
             Destroy(gameObject);
