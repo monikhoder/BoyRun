@@ -9,6 +9,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Transform playerTransform; // player
     [SerializeField] private GameObject groundPrefab;   // ground
     [SerializeField] private GameObject coinPrefab;     // coin
+    [SerializeField] private GameObject FlyingEnemyPrefab; // flying enemy
+    [SerializeField] private GameObject GroundEnemyPrefab; // ground enemy
 
     [Header("Ground Settings")]
     [SerializeField] private float groundWidth;
@@ -20,6 +22,14 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private int maxCoinsPerGround = 3;
     [SerializeField] private float coinYNormal = 1f;
     [SerializeField] private float coinYJump = 3.5f;
+
+    [Header("Enemy Settings")]
+    [SerializeField] private float flyingEnemySpawnRate = 0.3f;
+    [SerializeField] private float groundEnemySpawnRate = 0.3f;
+    [SerializeField] private float enemyYnormal = 1f;
+    [SerializeField] private float enemyYFly = 3.5f;
+
+
 
     private Vector3 lastEndPosition;
     private List<GameObject> groundActive = new List<GameObject>();
@@ -73,6 +83,10 @@ public class LevelGenerator : MonoBehaviour
 
         // Spawn coins
         SpawnCoins(newGround);
+        // Spawn flying enemy
+        SpawnFlyingEnemy(newGround);
+        // Spawn ground enemy
+        SpawnGroundEnemy(newGround);
         // Add to active list
         groundActive.Add(newGround);
 
@@ -121,6 +135,14 @@ public class LevelGenerator : MonoBehaviour
             // set tag
             tempCoin.tag = "Coin";
         }
+    }
+    private void SpawnFlyingEnemy(GameObject groundObj)
+    {
+
+
+    }
+    private void SpawnGroundEnemy(GameObject groundObj)
+    {
     }
 
     private void RemoveOldGround()
