@@ -6,9 +6,11 @@
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 .vs/
+.vscode/
 *.csproj
 *.unityproj
 *.sln
+*.slnx
 *.suo
 *.tmp
 *.user

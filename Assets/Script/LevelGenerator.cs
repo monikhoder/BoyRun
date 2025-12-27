@@ -8,11 +8,17 @@ public class LevelGenerator : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform playerTransform; // player
     [SerializeField] private GameObject groundPrefab;   // ground
+    [SerializeField] private GameObject coinPrefab;     // coin
 
-    [Header("Settings")]
+    [Header("Ground Settings")]
     [SerializeField] private float groundWidth;
     [SerializeField] private int groundInitial;
     [SerializeField] private float minDistanceToSpawn;
+
+
+    [Header("Coin Settings")]
+    [SerializeField] private float coinSpacing;
+    [SerializeField] private int maxCoinsPerGround;
 
     private Vector3 lastEndPosition;
     private List<GameObject> groundActive = new List<GameObject>();
