@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -24,10 +25,10 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private float coinYJump = 3.5f;
 
     [Header("Enemy Settings")]
-    [SerializeField] private float flyingEnemySpawnRate = 0.3f;
-    [SerializeField] private float groundEnemySpawnRate = 0.3f;
-    [SerializeField] private float enemyYnormal = 1f;
-    [SerializeField] private float enemyYFly = 3.5f;
+    [SerializeField] private int maxEnemiesPerGround = 4;
+    [SerializeField] private float enemyYGround = -0.5f;
+    [SerializeField] private float enemyYFly = 2.0f;
+    [SerializeField] private float minSpacing = 1.5f;  //spacing between coins and enemies
 
 
 
@@ -82,11 +83,11 @@ public class LevelGenerator : MonoBehaviour
         newGround.transform.rotation = Quaternion.identity;
 
         // Spawn coins
-        SpawnCoins(newGround);
-        // Spawn flying enemy
-        SpawnFlyingEnemy(newGround);
-        // Spawn ground enemy
-        SpawnGroundEnemy(newGround);
+        List<Vector3> spawnCoinPositions = SpawnCoins(newGround);
+
+        // Spawn enemies
+        SpawnEnemies(newGround, spawnCoinPositions);
+
         // Add to active list
         groundActive.Add(newGround);
 
@@ -94,8 +95,11 @@ public class LevelGenerator : MonoBehaviour
         lastEndPosition += new Vector3(groundWidth, 0, 0);
     }
 
-    private void SpawnCoins(GameObject groundObj)
+    private List<Vector3> SpawnCoins(GameObject groundObj)
     {
+        //list coin positions
+        List<Vector3> spawnCoinPositions = new List<Vector3>();
+
         // Remove old coin
         foreach (Transform child in groundObj.transform)
         {
@@ -112,8 +116,9 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < coinsToSpawn; i++)
         {
             // calculate position
-            float segmentWidth = groundWidth / (coinsToSpawn + 1);
-            float xPos = segmentWidth * (i + 1);
+            // float segmentWidth = groundWidth / (coinsToSpawn + 1);
+            // float xPos = segmentWidth * (i + 1);
+            float xPos = Random.Range(2f, groundWidth - 2f);
 
             float yPos;
             float randomValue = Random.Range(0f, 1f);
@@ -127,22 +132,97 @@ public class LevelGenerator : MonoBehaviour
                 yPos = coinYNormal;
             }
 
-            //create coin
+            //create Fly enemy
             GameObject tempCoin = Instantiate(coinPrefab, groundObj.transform);
 
             tempCoin.transform.localPosition = new Vector3(xPos, yPos, 0);
 
             // set tag
             tempCoin.tag = "Coin";
+
+            spawnCoinPositions.Add(new Vector3(xPos, yPos, 0));
         }
+        return spawnCoinPositions;
     }
-    private void SpawnFlyingEnemy(GameObject groundObj)
+    private void SpawnEnemies(GameObject groundObj, List<Vector3> coinPositions)
     {
+        //list enemies positions
+        List<Vector3> enemiesPositions = new List<Vector3>();
+
+        // Remove old Enemy
+        foreach (Transform child in groundObj.transform)
+        {
+            if (child.CompareTag("Enemy"))
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        // set enemy parent to ground
+        int enemiesToSpawn = Random.Range(1, maxEnemiesPerGround + 1);
+
+        // create enemies
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            // calculate position
+            float xPos = Random.Range(2f, groundWidth - 2f);
+            float yPos;
+            GameObject enemyToSpawn;
 
 
-    }
-    private void SpawnGroundEnemy(GameObject groundObj)
-    {
+            if (Random.value > 0.5f )
+            {
+                enemyToSpawn = FlyingEnemyPrefab;
+                yPos = enemyYFly;
+            }
+            else
+            {
+                enemyToSpawn = GroundEnemyPrefab;
+                yPos = enemyYGround;
+            }
+            bool isNearEnemy = false;
+          foreach(Vector3 enemyPos in enemiesPositions)
+            {
+                float distanceX = Mathf.Abs(xPos - enemyPos.x);
+                if(distanceX < minSpacing)
+                {
+                    isNearEnemy = true;
+                   break;
+                }
+
+            }
+            if(!isNearEnemy){
+                foreach(Vector3 coinPos in coinPositions)
+                {
+                    float distanceX = Mathf.Abs(xPos - coinPos.x);
+
+                    if(distanceX < minSpacing)
+                    {
+                        if(coinPos.y == coinYNormal)
+                        {
+                            enemyToSpawn = FlyingEnemyPrefab;
+                            yPos = enemyYFly;
+                        }
+                        else
+                        {   enemyToSpawn = GroundEnemyPrefab;
+                            yPos = enemyYGround;
+                        }
+                        break;
+                    }
+                }
+            }
+            if (!isNearEnemy)
+            {
+                //create enemy
+                GameObject tempEnemy = Instantiate(enemyToSpawn, groundObj.transform);
+
+                tempEnemy.transform.localPosition = new Vector3(xPos, yPos, 0);
+                // set tag
+                tempEnemy.tag = "Enemy";
+            }
+            enemiesPositions.Add(new Vector3(xPos,yPos, 0));
+        }
+
     }
 
     private void RemoveOldGround()
@@ -159,3 +239,5 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 }
+
+

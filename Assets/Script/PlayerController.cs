@@ -12,18 +12,27 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Check Info")]
     [SerializeField] private float groundCheckDistance;
 
-
+    [Header("Life Settings")]
+    [SerializeField] private int maxLife = 5;
+    public LayerMask groundLayer;
 
     private Rigidbody2D rb;
     private Animator animator;
     private bool isGrounded = true;
+    private int currentLife;
+    private UIManager uiManager;
 
-    public LayerMask groundLayer;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        uiManager = FindFirstObjectByType<UIManager>();
+        currentLife = maxLife;
+        if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
 
     }
 
@@ -43,11 +52,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.timeScale == 0)
             {
-                FindAnyObjectByType<UIManager>()?.ResumeGame();
+               // FindAnyObjectByType<UIManager>()?.ResumeGame();
+               uiManager.ResumeGame();
             }
             else
             {
-                FindAnyObjectByType<UIManager>()?.PauseGame();
+               // FindAnyObjectByType<UIManager>()?.PauseGame();
+               uiManager.PauseGame();
             }
         }
     }
@@ -72,6 +83,24 @@ public class PlayerController : MonoBehaviour
     {
 
         rb.linearVelocity = new Vector2(moveSpeed,rb.linearVelocity.y);
+    }
+
+
+    public void TakeDamage()
+    {
+        currentLife--;
+
+        // updatwe UI
+        if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
+
+        // if life 0
+        if (currentLife <= 0)
+        {
+           // Debug.Log("Game Over!");
+            if(uiManager != null) uiManager.GameOver();
+            moveSpeed = 0;
+            animator.enabled = false;
+        }
     }
     private void OnDrawGizmos()
     {
