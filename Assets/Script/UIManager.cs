@@ -18,9 +18,11 @@ public class UIManager : MonoBehaviour
     private int currentScore = 0;
     private int highScore = 0;
     public static bool isRestarting = false;
+    private PlayerController playerController;
 
     void Start()
     {
+        playerController = FindFirstObjectByType<PlayerController>();
         //Load High Score
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         UpdateScoreUI();
@@ -126,6 +128,14 @@ public class UIManager : MonoBehaviour
             highScore = currentScore;
             // save high score
             PlayerPrefs.SetInt("HighScore", highScore);
+        }
+        if (currentScore > 0 && currentScore % 10 == 0)
+        {
+            if (playerController != null)
+            {
+                playerController.IncreaseMoveSpeed(0.1f);
+            }
+
         }
 
         UpdateScoreUI();

@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 
     [Header("Moved Info")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
+    [SerializeField] private float moveSpeed = 3.5f;
+    [SerializeField] private float jumpForce= 18f;
 
     [Header("Ground Check Info")]
     [SerializeField] private float groundCheckDistance;
@@ -20,9 +20,16 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isGrounded = true;
     private int currentLife;
+    private float defaultMoveSpeed;
+    private float maxSpeed = 10f;
     private UIManager uiManager;
 
 
+    void Awake()
+    {
+        defaultMoveSpeed = moveSpeed;
+
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,7 +37,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentLife = maxLife;
-        uiManager = FindAnyObjectByType<UIManager>();
+        moveSpeed = defaultMoveSpeed;
+        uiManager = FindFirstObjectByType<UIManager>();
         if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
 
     }
@@ -64,6 +72,16 @@ public class PlayerController : MonoBehaviour
     {
 
         rb.linearVelocity = new Vector2(moveSpeed,rb.linearVelocity.y);
+    }
+    public void IncreaseMoveSpeed(float amount)
+    {
+        moveSpeed += amount;
+        if(moveSpeed > maxSpeed)
+        {
+            moveSpeed = maxSpeed;
+        }
+         Debug.Log("Speed Increased! Current Speed: " + moveSpeed);
+
     }
 
 

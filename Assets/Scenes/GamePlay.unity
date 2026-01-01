@@ -532,7 +532,7 @@ MonoBehaviour:
   maxEnemiesPerGround: 5
   enemyYGround: -3
   enemyYFly: 0
-  minSpacing: 2
+  minSpacing: 3
 --- !u!4 &316635313
 Transform:
   m_ObjectHideFlags: 0
@@ -2451,8 +2451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0129501d039d95a4088da51e00c05b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 4
-  jumpForce: 15
+  moveSpeed: 3.5
+  jumpForce: 18
   groundCheckDistance: 0.91
   maxLife: 5
   groundLayer:
