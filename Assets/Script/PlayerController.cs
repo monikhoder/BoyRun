@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isGrounded = true;
     private int currentLife;
-    //private UIManager uiManager;
+    private UIManager uiManager;
 
 
 
@@ -29,11 +29,9 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-      //  uiManager = FindFirstObjectByType<UIManager>();
         currentLife = maxLife;
-        FindAnyObjectByType<UIManager>()?.UpdateLifeUI(currentLife);
-      //  if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
+        uiManager = FindAnyObjectByType<UIManager>();
+        if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
 
     }
 
@@ -42,26 +40,8 @@ public class PlayerController : MonoBehaviour
     {
 
         AnimatorController();
-        PauseGame();
         PlayerMove();
         PlayerJump();
-    }
-
-    private void PauseGame()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Time.timeScale == 0)
-            {
-                FindAnyObjectByType<UIManager>()?.ResumeGame();
-               // if(uiManager != null) uiManager.ResumeGame();
-            }
-            else
-            {
-               FindAnyObjectByType<UIManager>()?.PauseGame();
-                //if(uiManager != null) uiManager.PauseGame();
-            }
-        }
     }
 
     private void AnimatorController()
@@ -92,14 +72,11 @@ public class PlayerController : MonoBehaviour
         currentLife--;
 
         // updatwe UI
-      //  if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
-        FindAnyObjectByType<UIManager>()?.UpdateLifeUI(currentLife);
+        if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
         // if life 0
         if (currentLife <= 0)
         {
-           // Debug.Log("Game Over!");
-           // if(uiManager != null) uiManager.GameOver();
-            FindAnyObjectByType<UIManager>()?.GameOver();
+            if(uiManager != null) uiManager.GameOver();
             moveSpeed = 0;
             animator.enabled = false;
         }

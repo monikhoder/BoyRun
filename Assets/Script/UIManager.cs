@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
 
     private int currentScore = 0;
     private int highScore = 0;
+    public static bool isRestarting = false;
 
     void Start()
     {
@@ -25,9 +26,33 @@ public class UIManager : MonoBehaviour
         UpdateScoreUI();
 
         //show start screen at the beginning
-        ShowStartScreen();
+        if (isRestarting)
+        {
+            StartGame();
+            isRestarting = false;
+        }
+        else
+        {
+            ShowStartScreen();
+        }
+
 
         AudioManager.Instance.PlayMusic("bgm");
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseScreen.activeSelf)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
     }
 
     // game control
@@ -46,6 +71,7 @@ public class UIManager : MonoBehaviour
         startScreen.SetActive(false);
         gameOverScreen.SetActive(false);
         gameUI.SetActive(true);
+        AudioManager.Instance.PlaySound("UIPopup");
     }
 
     public void PauseGame()
@@ -57,6 +83,7 @@ public class UIManager : MonoBehaviour
 
     public void ResumeGame()
     {
+
         Time.timeScale = 1;
         pauseScreen.SetActive(false);
         AudioManager.Instance.PlaySound("UIPopup");
@@ -64,6 +91,7 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
+        isRestarting = true;
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -73,17 +101,20 @@ public class UIManager : MonoBehaviour
         if (gameOverScreen != null)
         {
             gameOverScreen.SetActive(true);
-            // បង្ហាញពិន្ទុចុងក្រោយ និង High Score
             finalScoreText.text = "SCORE: " + currentScore;
             hightScoreText.text = "HIGHT SCORE :" + highScore;
+            AudioManager.Instance.StopMusic();
+
+            if(currentScore >= highScore)
+            {
+                AudioManager.Instance.PlaySound("hightScore");
+            }
+            else
+            {
+                AudioManager.Instance.PlaySound("game_over");
+            }
         }
     }
-
-    // public void BackToMenu()
-    // {
-    //     Time.timeScale = 1;
-    //     SceneManager.LoadScene("Menu");
-    // }
 
     public void RefreshCoin()
     {

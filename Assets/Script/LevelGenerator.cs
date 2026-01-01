@@ -116,8 +116,6 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < coinsToSpawn; i++)
         {
             // calculate position
-            // float segmentWidth = groundWidth / (coinsToSpawn + 1);
-            // float xPos = segmentWidth * (i + 1);
             float xPos = Random.Range(2f, groundWidth - 2f);
 
             float yPos;
