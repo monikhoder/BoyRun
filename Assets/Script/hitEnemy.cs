@@ -13,7 +13,7 @@ public class hitEnemy : MonoBehaviour
         {
 
             FindAnyObjectByType<PlayerController>()?.TakeDamage();
-
+            AudioManager.Instance.PlaySound("Hit");
             // Destroy coin
             Destroy(gameObject);
         }

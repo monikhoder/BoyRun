@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
 
         //show start screen at the beginning
         ShowStartScreen();
+
+        AudioManager.Instance.PlayMusic("bgm");
     }
 
     // game control
@@ -50,12 +52,14 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;
         pauseScreen.SetActive(true);
+        AudioManager.Instance.PlaySound("UIPopup");
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
         pauseScreen.SetActive(false);
+        AudioManager.Instance.PlaySound("UIPopup");
     }
 
     public void RestartGame()

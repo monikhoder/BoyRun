@@ -11,6 +11,8 @@ public class ItemPickup : MonoBehaviour
 
 
             FindAnyObjectByType<UIManager>()?.RefreshCoin();
+            AudioManager.Instance.PlaySound("Item");
+           
 
             // Destroy coin
             Destroy(gameObject);

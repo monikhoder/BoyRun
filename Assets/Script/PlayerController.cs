@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private bool isGrounded = true;
     private int currentLife;
-    private UIManager uiManager;
+    //private UIManager uiManager;
 
 
 
@@ -30,9 +30,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
-        uiManager = FindFirstObjectByType<UIManager>();
+      //  uiManager = FindFirstObjectByType<UIManager>();
         currentLife = maxLife;
-        if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
+        FindAnyObjectByType<UIManager>()?.UpdateLifeUI(currentLife);
+      //  if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
 
     }
 
@@ -52,13 +53,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Time.timeScale == 0)
             {
-               // FindAnyObjectByType<UIManager>()?.ResumeGame();
-               uiManager.ResumeGame();
+                FindAnyObjectByType<UIManager>()?.ResumeGame();
+               // if(uiManager != null) uiManager.ResumeGame();
             }
             else
             {
-               // FindAnyObjectByType<UIManager>()?.PauseGame();
-               uiManager.PauseGame();
+               FindAnyObjectByType<UIManager>()?.PauseGame();
+                //if(uiManager != null) uiManager.PauseGame();
             }
         }
     }
@@ -91,13 +92,14 @@ public class PlayerController : MonoBehaviour
         currentLife--;
 
         // updatwe UI
-        if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
-
+      //  if(uiManager != null) uiManager.UpdateLifeUI(currentLife);
+        FindAnyObjectByType<UIManager>()?.UpdateLifeUI(currentLife);
         // if life 0
         if (currentLife <= 0)
         {
            // Debug.Log("Game Over!");
-            if(uiManager != null) uiManager.GameOver();
+           // if(uiManager != null) uiManager.GameOver();
+            FindAnyObjectByType<UIManager>()?.GameOver();
             moveSpeed = 0;
             animator.enabled = false;
         }
