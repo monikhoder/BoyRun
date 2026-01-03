@@ -1,0 +1,8 @@
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/CMakeFiles/edit_cache.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/CMakeFiles/rebuild_cache.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/GameActivity/CMakeFiles/game.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+E:/repo/Unity/BoyRun/.utmp/RelWithDebInfo/5njz5c3m/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

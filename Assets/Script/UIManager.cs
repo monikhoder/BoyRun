@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject gameUI;
      [SerializeField] private GameObject gameOverScreen;
-    [SerializeField] private Text lifeText;
     [SerializeField] private Text finalScoreText;
     [SerializeField] private Text hightScoreText;
+    [SerializeField] private GameObject heartPrefab;
+    [SerializeField] private Transform lifeContainer;
 
+
+    private List<GameObject> heartList = new List<GameObject>();
     private int currentScore = 0;
     private int highScore = 0;
     public static bool isRestarting = false;
@@ -148,19 +152,21 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateLifeUI(int currentLife)
     {
-        if (lifeText != null)
-            lifeText.text = lifeEmoji(currentLife);
+        foreach (GameObject heart in heartList)
+        {
+            Destroy(heart);
+        }
+        heartList.Clear();
+
+        for (int i = 0; i < currentLife; i++)
+        {
+            GameObject newHeart = Instantiate(heartPrefab, lifeContainer);
+            heartList.Add(newHeart);
+        }
+
     }
 
-    private string lifeEmoji(int life)
-    {
-       string hearts = "";
-        for (int i = 0; i < life; i++)
-        {
-            hearts += "❤";
-        }
-        return hearts;
-    }
+
 
 
 
