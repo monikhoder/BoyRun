@@ -5,8 +5,9 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-.vs/
-.vscode/
+/.vs/
+/.vscode
+/.utmp
 *.csproj
 *.unityproj
 *.sln
